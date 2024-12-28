@@ -18,3 +18,5 @@ Added a Todo list with items for follow-up.
 Added an add_task method to project class.
 Added a simple documentation line on tests_basic
 Added Accessor Methods for the Member, Task, and Project classes
+Changed folder name for sample to tla, with main.py now being tla.py
+Added concepts of a unit test for adding members to a task, still unfinished
