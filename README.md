@@ -11,3 +11,10 @@ and keeping track of what tasks they've done before.
 *   create functionality to save and load information from external file
 
 ## Changelog:
+
+### 12/27/24: 
+Updated README to have a different format
+Added a Todo list with items for follow-up.
+Added an add_task method to project class.
+Added a simple documentation line on tests_basic
+Added Accessor Methods for the Member, Task, and Project classes
