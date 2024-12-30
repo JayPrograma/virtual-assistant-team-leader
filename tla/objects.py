@@ -17,14 +17,16 @@ class Member:
     #defining accessor methods
     def get_first_name(self):
         return self.first_name
+    
     def get_last_name(self):
         return self.last_name
 
 class Task:
     #init method
-    def __init__(self, task_name = "FooTask", participant_list = []):
+    def __init__(self, task_name = "FooTask", members_needed = 0, members_list = []):
         self.name = task_name
-        self.participants = participant_list
+        self.needed = members_needed
+        self.members = members_list
     
     #str method
     def __str__(self):
@@ -33,22 +35,16 @@ class Task:
     #accessor mehods
     def get_name(self):
         return self.name
-    def get_participants(self):
-        return self.participants
     
-    #member methods
-    def add_participant(self, first = "Foo", last = "Bar"):
-        """
-        Adds a Member to the task participants list.
-        """
-        if first == "Foo":
-            print("Please enter participant information: \n")
-            first_name = input("First Name: ")
-            last_name = input("Last Name: ")
-            self.participants.append(Member(first_name,last_name))
-        else:
-            self.participants.append(Member(first,last))
-        
+    def get_needed(self):
+        return self.needed
+    
+    def get_members(self):
+        return self.members
+    
+    #mutator method
+    def add_members(self, member):
+        self.members.append(member)
 
 class Project:
     #init method
@@ -64,17 +60,23 @@ class Project:
     #Accessor methods
     def get_name(self):
         return self.name
+    
     def get_members(self):
         return self.members
+    
     def get_tasks(self):
         return self.tasks
+    
+    #Member Methods
+    
+    def assign_members(self):
+        from random import shuffle
+        unassigned_members = self.get_members()
+        shuffle(unassigned_members)
         
-    def add_task(self, task_name="Foo", participant_list = []):
-        """
-        Adds a task to the Project.
-        """
-        if task_name == "Foo":
-            input_name = input("Please Enter Task Name: ")
-            self.tasks.append(Task(input_name, participant_list))
-        else:
-            self.tasks.append(Task(task_name, participant_list))
+        #have to check why it is that all tasks passed through this method have 2 members assigned
+        
+        for task in self.tasks:
+            needed = task.get_needed()
+            while len(task.get_members()) < needed:
+                task.add_members(unassigned_members.pop())
