@@ -23,14 +23,25 @@ class Member:
 
 class Task:
     #init method
-    def __init__(self, task_name = "FooTask", members_needed = 0, members_list = []):
+    def __init__(self, task_name = "FooTask", members_needed = 0, members_list = None):
         self.name = task_name
         self.needed = members_needed
-        self.members = members_list
+        
+        if members_list is None:
+            self.members = []
+        else:
+            self.members = members_list
     
     #str method
     def __str__(self):
-        return f"Task Name: {self.name}\n"
+        message = f"Task Name: {self.name}\n"
+        message += f"Members Needed: {self.needed}\n"
+        message += "Members:\n"
+        for member in self.members:
+            message += str(member)
+        message += "-------------------------------------------------\n"
+        
+        return message
     
     #accessor mehods
     def get_name(self):
@@ -43,15 +54,23 @@ class Task:
         return self.members
     
     #mutator method
-    def add_members(self, member):
+    def add_member(self, member):
         self.members.append(member)
 
 class Project:
     #init method
-    def __init__(self,project_name = "FooProject",members_list = [], task_list = []):
+    def __init__(self,project_name = "FooProject",members_list = None, task_list = None):
         self.name = project_name
-        self.members = members_list
-        self.tasks = task_list
+        
+        if members_list is None:
+            self.members = []
+        else:
+            self.members = members_list
+    
+        if task_list is None:
+            self.tasks = []
+        else:
+            self.tasks = task_list
         
     #str method
     def __str__(self):
@@ -71,12 +90,17 @@ class Project:
     
     def assign_members(self):
         from random import shuffle
-        unassigned_members = self.get_members()
-        shuffle(unassigned_members)
+        working_members = self.get_members()
+        working_tasks = self.get_tasks()
         
-        #have to check why it is that all tasks passed through this method have 2 members assigned
+        shuffle(working_members)
+        shuffle(working_tasks)
         
-        for task in self.tasks:
-            needed = task.get_needed()
-            while len(task.get_members()) < needed:
-                task.add_members(unassigned_members.pop())
+        iterator1 = 0 #iterator that goes through member list
+        
+        for task in working_tasks:
+            if iterator1 >= len(working_members):
+                iterator1 = 0
+            for i in range(task.get_needed()):
+                task.add_member(working_members[iterator1])
+                iterator1+=1

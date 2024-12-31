@@ -6,13 +6,18 @@ Uses for the TLA include delegating tasks to members in a random and fair manner
 and keeping track of what tasks they've done before.
 
 ## TODO:
-*   Check why it is that test_assing_members claims that all tasks are being assigned 2 members as opposed to only the amount needed by the given task 
 *   Modify assign_members() method in Project class to account for cases of there being less members than there are tasks and vice-versa
+*   Create some kind of text-based CLI
+*   Look into moving the __str__ method duties from the Member, Task, and Project classes to the CLI file if optimal, else keep the same
 *   Create functionality to save and load information from external file
 
 ## Changelog:
 
-### 12/29/24
+### 12/30/24:
+*   Modified Task __str__ method to provide more information
+*   Encountered the Mutable Default Argument in Python... Most Astonishment, and changed the way I established the default list arugments for the Task and Project classes :)
+
+### 12/29/24:
 *   Removed Tests folder and simply placed the tests_basic.py file on highest-level directory in package /tla/
 *   Removed certain methods in Project and Task classes that were unnecessary right now
 *   Renamed "participants" to "members" in Task class for consistency with other class naming conventions
