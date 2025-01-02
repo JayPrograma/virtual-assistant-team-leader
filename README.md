@@ -6,12 +6,20 @@ Uses for the TLA include delegating tasks to members in a random and fair manner
 and keeping track of what tasks they've done before.
 
 ## TODO:
+*   Modify tests_basic.py to adhere to PEP8 standards
 *   Modify assign_members() method in Project class to account for cases of there being less members than there are tasks and vice-versa
+*   Add the utility to remove tasks once complete. Have these be stored in an archived project
 *   Create some kind of text-based CLI
 *   Look into moving the __str__ method duties from the Member, Task, and Project classes to the CLI file if optimal, else keep the same
 *   Create functionality to save and load information from external file
 
 ## Changelog:
+
+### 12/31/24
+*   Added a remove_task and add_task methods to the Project class
+*   Made changes to existing code in objects.py to better adhere to PEP8 standards
+*   Changed name of project to reflect common nomenclature in the target audience 
+*   Changed structure of project directory to adhere to modern recommendations per the Python Packaging User Guide
 
 ### 12/30/24:
 *   Modified Task __str__ method to provide more information
