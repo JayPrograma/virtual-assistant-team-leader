@@ -1,7 +1,7 @@
 """
 This file contains the unit tests for the Team Leader Assistant Project.
 """
-from tla import objects
+from src.vatl import objects
 import unittest as ut
 
 class TestMemberClass(ut.TestCase):
@@ -80,6 +80,23 @@ class TestProjectClass(ut.TestCase):
         
         self.assertEqual(test_project.get_tasks(), [task1, task2], "Something is wrong with get_tasks!")
     
+    #test constructor methods
+    def test_add_task(self):
+        member1 = objects.Member("John1", "Doe1")
+        member2 = objects.Member("John2", "Doe2")
+        member3 = objects.Member("John3", "Doe3")
+        member4 = objects.Member("John4", "Doe4")
+        member_list = [member1, member2, member3, member4]
+        
+        test_project = objects.Project("Project1", member_list)
+        
+        test_task = objects.Task("Task1", 2)
+        
+        test_project.add_task(test_task)
+        task_list = test_project.get_tasks()
+        
+        self.assertEqual(task_list[0],test_task, "Error with add_task")
+
     #test member methods
     def test_assign_members(self):
         member1 = objects.Member("John1", "Doe1")
@@ -102,6 +119,24 @@ class TestProjectClass(ut.TestCase):
         self.assertEqual(len(assigned_tasks[0].get_members()), assigned_tasks[0].get_needed(), "Error in Task1")
         self.assertEqual(len(assigned_tasks[1].get_members()), assigned_tasks[1].get_needed(), "Error in Task2")
         self.assertEqual(len(assigned_tasks[2].get_members()), assigned_tasks[2].get_needed(), "Error in Task3")
+        
+    def test_remove_task(self):
+        member1 = objects.Member("John1", "Doe1")
+        member2 = objects.Member("John2", "Doe2")
+        member3 = objects.Member("John3", "Doe3")
+        member4 = objects.Member("John4", "Doe4")
+        member_list = [member1, member2, member3, member4]
+        
+        task1 = objects.Task("Task1",2)
+        task2 = objects.Task("Task2",2)
+        task_list = [task1, task2]
+        
+        test_project = objects.Project("Project1", member_list, task_list)
+        
+        test_project.remove_task("Task1")
+        
+        self.assertEqual(len(test_project.get_tasks()), 1, "Error with remove_task!")
+
 
 if __name__ == "__main__":
     ut.main()
